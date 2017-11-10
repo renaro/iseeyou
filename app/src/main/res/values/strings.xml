@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">I see you</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="partiesName"/>
+    <string-array name="partiesName">
+        <item>PT</item>
+        <item>PSDB</item>
+        <item>PMDB</item>
+    </string-array>
+</resources>
