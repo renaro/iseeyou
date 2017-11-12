@@ -2,9 +2,11 @@ package com.renaro.iseeyou.home
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Spinner
 import com.renaro.iseeyou.R
 import com.renaro.iseeyou.bo.PartiesBO
@@ -23,6 +25,7 @@ class HomeActivity : HomeView, AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val list = findViewById(R.id.list) as RecyclerView
+        list.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         val quota = findViewById(R.id.quota) as Spinner
         val months = findViewById(R.id.month) as Spinner
         val search = findViewById(R.id.search_button) as Button
@@ -45,7 +48,7 @@ class HomeActivity : HomeView, AppCompatActivity() {
     }
 
     override fun showReimbursements(reimbursements: Array<Reimbursement>) {
-        println(reimbursements[2].congresspersonName)
+        list.adapter = ReimbursementAdapter(reimbursements)
     }
 
 
