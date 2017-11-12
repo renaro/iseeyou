@@ -13,10 +13,6 @@ import org.jetbrains.anko.uiThread
 
 class HomePresenter(val partiesBO: PartiesBO, val view :HomeView) {
 
-    fun fetchCongressPerson(): Array<CongressPerson> {
-    return partiesBO.fetchCongressPerson()
-    }
-
     fun onSearchClicked() {
         val monthNumber = Months.values().filter { it.title == view.getSelectedMonth() }.first().code
         val quotaCode = Quota.values().filter { it.title == view.getSelectedQuota() }.first().code

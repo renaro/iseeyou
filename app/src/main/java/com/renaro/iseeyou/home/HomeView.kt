@@ -10,6 +10,6 @@ interface HomeView{
 
     fun getSelectedMonth() : String
     fun getSelectedQuota() : String
-    fun showReimbursements(reimbursments: Array<Reimbursement>)
+    fun showReimbursements(reimbursements: Array<Reimbursement>)
 
 }
