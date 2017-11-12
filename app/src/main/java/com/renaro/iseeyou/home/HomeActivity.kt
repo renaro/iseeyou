@@ -9,23 +9,20 @@ import android.widget.Spinner
 import com.renaro.iseeyou.R
 import com.renaro.iseeyou.bo.PartiesBO
 import com.renaro.iseeyou.dao.PartiesDAO
-import com.renaro.iseeyou.model.CongressPerson
 import com.renaro.iseeyou.model.Months
 import com.renaro.iseeyou.model.Quota
 import com.renaro.iseeyou.model.Reimbursement
 import kotlinx.android.synthetic.main.content_home.*
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.uiThread
 
-class HomeActivity : HomeView, AppCompatActivity()     {
+class HomeActivity : HomeView, AppCompatActivity() {
 
-    private val mPresenter: HomePresenter =  HomePresenter(PartiesBO(PartiesDAO()), this)
+    private val mPresenter: HomePresenter = HomePresenter(PartiesBO(PartiesDAO()), this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val list  = findViewById(R.id.list) as RecyclerView
+        val list = findViewById(R.id.list) as RecyclerView
         val quota = findViewById(R.id.quota) as Spinner
         val months = findViewById(R.id.month) as Spinner
         val search = findViewById(R.id.search_button) as Button
@@ -33,20 +30,10 @@ class HomeActivity : HomeView, AppCompatActivity()     {
         months.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Array(Months.values().size, { i -> Months.values()[i].title }))
         search.onClick { mPresenter.onSearchClicked() }
 
-
-
     }
 
     override fun onResume() {
         super.onResume()
-
-        doAsync {
-            val result = mPresenter?.fetchCongressPerson() as Array<CongressPerson>
-            uiThread {
-                println(result.size)
-            }
-
-        }
     }
 
     override fun getSelectedMonth(): String {
@@ -57,8 +44,8 @@ class HomeActivity : HomeView, AppCompatActivity()     {
         return quota.selectedItem.toString()
     }
 
-    override fun showReimbursements(reimbursments: Array<Reimbursement>) {
-        println(reimbursments.size)
+    override fun showReimbursements(reimbursements: Array<Reimbursement>) {
+        println(reimbursements[2].congresspersonName)
     }
 
 
