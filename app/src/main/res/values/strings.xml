@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">I see you</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="party_format">Partido %s</string>
+    <string name="party_format">Partido : %s</string>
     <string name="partiesName"/>
     <string-array name="partiesName">
         <item>PT</item>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
@@ -17,7 +18,7 @@ import com.renaro.iseeyou.model.Reimbursement
 import kotlinx.android.synthetic.main.content_home.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class HomeActivity : HomeView, AppCompatActivity() {
+class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimbursementClicked {
 
     private val mPresenter: HomePresenter = HomePresenter(PartiesBO(PartiesDAO()), this)
 
@@ -48,8 +49,21 @@ class HomeActivity : HomeView, AppCompatActivity() {
     }
 
     override fun showReimbursements(reimbursements: Array<Reimbursement>) {
-        list.adapter = ReimbursementAdapter(reimbursements)
+        list.adapter = ReimbursementAdapter(reimbursements, this)
     }
 
+    override fun showLoading() {
+        println("show loading")
+        loading.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        println("hide loading")
+        loading.visibility = View.INVISIBLE
+    }
+
+    override fun onClick(reimbursement: Reimbursement) {
+        println("Clicou no item =${reimbursement.documentId}")
+    }
 
 }

@@ -14,7 +14,7 @@ import java.util.*
  * Created by renarosantos1 on 12/11/17.
  */
 
-class ReimbursementAdapter( var reimbursments : Array<Reimbursement>) : RecyclerView.Adapter<ReimbursementAdapter.ViewHolder>() {
+class ReimbursementAdapter( var reimbursements : Array<Reimbursement>, var listener : OnReimbursementClicked) : RecyclerView.Adapter<ReimbursementAdapter.ViewHolder>() {
 
     fun ViewGroup.inflate(layoutRes: Int): View {
         return LayoutInflater.from(context).inflate(layoutRes, this, false)
@@ -22,25 +22,31 @@ class ReimbursementAdapter( var reimbursments : Array<Reimbursement>) : Recycler
 
 
     override fun getItemCount(): Int {
-        return reimbursments.size
+        return reimbursements.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bind(reimbursments[position])
+        holder?.bind(reimbursements[position])
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder = ViewHolder(parent?.inflate(R.layout.reimbursement_item))
 
 
-    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(reimbursement: Reimbursement) = with(itemView) {
-            congresspersonName.setText(reimbursement.congresspersonName)
-            party.setText(context.getString(R.string.party_format, reimbursement.party))
+            value.text = String.format(Locale.getDefault(),"%.2f",reimbursement.totalNetValue)
+            congresspersonName.text = reimbursement.congresspersonName
+            party.text = context.getString(R.string.party_format, reimbursement.party)
+            setOnClickListener({v -> listener.onClick(reimbursement)})
         }
 
 
+    }
+
+    interface OnReimbursementClicked{
+        fun onClick(reimbursement: Reimbursement)
     }
 
 }

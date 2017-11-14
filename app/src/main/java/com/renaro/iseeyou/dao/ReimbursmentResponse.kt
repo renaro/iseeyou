@@ -12,7 +12,7 @@ class ReimbursmentResponse(
 
 class ReimbursmentEntity(
         val total_net_value : Double,
-        val documentId : Long,
+        val document_id : Long,
         val applicant_id : Long,
         val year : Int,
         val month : Int,

@@ -11,7 +11,7 @@ class Reimbursement(val totalNetValue: Double, val documentId: Long, val year: I
 
     companion object {
         fun from(entity: ReimbursmentEntity): Reimbursement {
-            return Reimbursement(entity.total_net_value, entity.documentId, entity.year, entity.applicant_id,
+            return Reimbursement(entity.total_net_value, entity.document_id, entity.year, entity.applicant_id,
                     entity.congressperson_name, entity.party, entity.party, entity.issue_date, entity.month)
         }
     }

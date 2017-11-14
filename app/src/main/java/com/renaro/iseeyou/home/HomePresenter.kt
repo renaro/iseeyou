@@ -16,9 +16,11 @@ class HomePresenter(val partiesBO: PartiesBO, val view :HomeView) {
     fun onSearchClicked() {
         val monthNumber = Months.values().filter { it.title == view.getSelectedMonth() }.first().code
         val quotaCode = Quota.values().filter { it.title == view.getSelectedQuota() }.first().code
+        view.showLoading()
         doAsync{
             val reimbursments = partiesBO.fetchReimbursements(monthNumber, quotaCode)
             uiThread {
+                view.hideLoading()
                 view.showReimbursements(reimbursments)
             }
         }

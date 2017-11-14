@@ -11,5 +11,7 @@ interface HomeView{
     fun getSelectedMonth() : String
     fun getSelectedQuota() : String
     fun showReimbursements(reimbursements: Array<Reimbursement>)
+    fun showLoading()
+    fun hideLoading()
 
 }
