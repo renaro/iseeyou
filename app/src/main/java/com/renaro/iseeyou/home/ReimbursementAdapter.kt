@@ -20,6 +20,14 @@ class ReimbursementAdapter( var reimbursements : Array<Reimbursement>, var liste
         return LayoutInflater.from(context).inflate(layoutRes, this, false)
     }
 
+    fun String.formatToDate() : String {
+        if (this.length == 10) {
+            return this.substring(8,10) +"/"+this.substring(5,7)+ "/"+ this.substring(0,4)
+        } else {
+            return this
+        }
+    }
+
 
     override fun getItemCount(): Int {
         return reimbursements.size
@@ -39,6 +47,7 @@ class ReimbursementAdapter( var reimbursements : Array<Reimbursement>, var liste
             value.text = String.format(Locale.getDefault(),"%.2f",reimbursement.totalNetValue)
             congresspersonName.text = reimbursement.congresspersonName
             party.text = context.getString(R.string.party_format, reimbursement.party)
+            date.text = reimbursement.issueDate.formatToDate()
             setOnClickListener({v -> listener.onClick(reimbursement)})
         }
 

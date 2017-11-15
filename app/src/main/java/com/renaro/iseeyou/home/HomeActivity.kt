@@ -1,14 +1,14 @@
 package com.renaro.iseeyou.home
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.Spinner
+import android.widget.*
 import com.renaro.iseeyou.R
 import com.renaro.iseeyou.bo.PartiesBO
 import com.renaro.iseeyou.dao.PartiesDAO
@@ -17,6 +17,7 @@ import com.renaro.iseeyou.model.Quota
 import com.renaro.iseeyou.model.Reimbursement
 import kotlinx.android.synthetic.main.content_home.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+
 
 class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimbursementClicked {
 
@@ -63,7 +64,16 @@ class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimb
     }
 
     override fun onClick(reimbursement: Reimbursement) {
-        println("Clicou no item =${reimbursement.documentId}")
+        mPresenter.onReimbursementClicked(reimbursement)
+    }
+
+    override fun openPdfFile(pdfUrl: String) {
+        try {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfUrl))
+            startActivity(browserIntent)
+        } catch ( _ : ActivityNotFoundException) {
+            Toast.makeText(this, "Não foi possível abrir PDF", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

@@ -20,5 +20,9 @@ class ReimbursmentEntity(
         val issue_date : String,
         val party : String,
         val supplier : String,
-        val state : String
+        val state : String,
+        val receipt : Receipt?
+
 )
+
+class Receipt (val url : String?)

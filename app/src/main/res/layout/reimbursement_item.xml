@@ -31,14 +31,15 @@
         android:id="@+id/party"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:text="@string/party_format"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/sub_title_size"
         app:layout_constraintTop_toBottomOf="@+id/congresspersonName"
-        app:layout_constraintBottom_toTopOf="@+id/separator"
-        android:layout_marginBottom="3dp"/>
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/date"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <View
         android:id="@+id/separator"
@@ -46,6 +47,19 @@
         android:layout_height="1dp"
         android:layout_marginBottom="1dp"
         android:background="#4a4a4a"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="@dimen/sub_title_size"
+        android:textStyle=""
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"/>
 </android.support.constraint.ConstraintLayout>

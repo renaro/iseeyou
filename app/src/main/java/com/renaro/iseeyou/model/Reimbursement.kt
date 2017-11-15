@@ -7,12 +7,14 @@ import com.renaro.iseeyou.dao.ReimbursmentEntity
  */
 
 class Reimbursement(val totalNetValue: Double, val documentId: Long, val year: Int, val applicantId: Long,
-                    val congresspersonName: String, val party: String, val state: String, val issueDate: String, val month: Int) {
+                    val congresspersonName: String, val party: String, val state: String,
+                    val issueDate: String, val month: Int, val pdfUrl : String) {
 
     companion object {
         fun from(entity: ReimbursmentEntity): Reimbursement {
             return Reimbursement(entity.total_net_value, entity.document_id, entity.year, entity.applicant_id,
-                    entity.congressperson_name, entity.party, entity.party, entity.issue_date, entity.month)
+                    entity.congressperson_name, entity.party, entity.party,
+                    entity.issue_date, entity.month, entity.receipt?.url ?: "" )
         }
     }
 }

@@ -13,5 +13,6 @@ interface HomeView{
     fun showReimbursements(reimbursements: Array<Reimbursement>)
     fun showLoading()
     fun hideLoading()
+    fun openPdfFile(pdfUrl: String)
 
 }
