@@ -14,5 +14,6 @@ interface HomeView{
     fun showLoading()
     fun hideLoading()
     fun openPdfFile(pdfUrl: String)
+    fun searchAgainSoon()
 
 }

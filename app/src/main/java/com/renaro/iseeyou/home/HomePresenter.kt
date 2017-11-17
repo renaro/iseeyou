@@ -13,12 +13,19 @@ import org.jetbrains.anko.uiThread
 
 class HomePresenter(val partiesBO: PartiesBO, val view: HomeView) {
 
+    var numberOfSearchs: Int = 1
+    var isLoading: Boolean = false
+    var monthNumber: Int = 1// random initial month
+    var quotaCode: Int = Quota.MEAL.code// random inital quota
+    val OFFSET: Int = 10
+
     fun onSearchClicked() {
-        val monthNumber = Months.values().filter { it.title == view.getSelectedMonth() }.first().code
-        val quotaCode = Quota.values().filter { it.title == view.getSelectedQuota() }.first().code
+        numberOfSearchs = 1
+        monthNumber = Months.values().filter { it.title == view.getSelectedMonth() }.first().code
+        quotaCode = Quota.values().filter { it.title == view.getSelectedQuota() }.first().code
         view.showLoading()
         doAsync {
-            val reimbursments = partiesBO.fetchReimbursements(monthNumber, quotaCode)
+            val reimbursments = partiesBO.fetchReimbursements(monthNumber, quotaCode, 0)
             uiThread {
                 view.hideLoading()
                 view.showReimbursements(reimbursments)
@@ -31,6 +38,26 @@ class HomePresenter(val partiesBO: PartiesBO, val view: HomeView) {
         if (url.isNotEmpty()) {
             view.openPdfFile(url)
         }
+    }
+
+    fun lastItemReached() {
+        if (!isLoading) {
+            isLoading = true
+            view.showLoading()
+            doAsync {
+                val reimbursments = partiesBO.fetchReimbursements(monthNumber, quotaCode, numberOfSearchs * OFFSET)
+                uiThread {
+                    isLoading = false
+                    view.showReimbursements(reimbursments)
+                    view.hideLoading()
+                    numberOfSearchs++
+                }
+            }
+        } else {
+            view.searchAgainSoon()
+        }
+
+
     }
 
 

@@ -19,9 +19,10 @@ import kotlinx.android.synthetic.main.content_home.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
-class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimbursementClicked {
+class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimbursementClicked, ReimbursementAdapter.OnLastItemReached {
 
     private val mPresenter: HomePresenter = HomePresenter(PartiesBO(PartiesDAO()), this)
+    val adapter = ReimbursementAdapter(arrayOf(), this, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +34,22 @@ class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimb
         val search = findViewById(R.id.search_button) as Button
         quota.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Array(Quota.values().size, { i -> Quota.values()[i].title }))
         months.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Array(Months.values().size, { i -> Months.values()[i].title }))
-        search.onClick { mPresenter.onSearchClicked() }
+        list.adapter = adapter
+        search.onClick {
+            adapter.reimbursements = arrayOf()
+            mPresenter.onSearchClicked()
+        }
 
     }
 
     override fun onResume() {
         super.onResume()
     }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
 
     override fun getSelectedMonth(): String {
         return month.selectedItem.toString()
@@ -50,22 +60,25 @@ class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimb
     }
 
     override fun showReimbursements(reimbursements: Array<Reimbursement>) {
-        list.adapter = ReimbursementAdapter(reimbursements, this)
+        adapter.addItems(reimbursements)
     }
 
     override fun showLoading() {
-        println("show loading")
         loading.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        println("hide loading")
         loading.visibility = View.INVISIBLE
     }
 
     override fun onClick(reimbursement: Reimbursement) {
         mPresenter.onReimbursementClicked(reimbursement)
     }
+
+    override fun lastItemReached() {
+        mPresenter.lastItemReached()
+    }
+
 
     override fun openPdfFile(pdfUrl: String) {
         try {
@@ -74,6 +87,11 @@ class HomeActivity : HomeView, AppCompatActivity(), ReimbursementAdapter.OnReimb
         } catch ( _ : ActivityNotFoundException) {
             Toast.makeText(this, "Não foi possível abrir PDF", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    //presenter was busy searching, try again in 2 seconds
+    override fun searchAgainSoon() {
+        list.postDelayed({mPresenter.lastItemReached()}, 4000)
     }
 
 }

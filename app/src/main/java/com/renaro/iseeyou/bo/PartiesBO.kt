@@ -9,8 +9,8 @@ import com.renaro.iseeyou.model.Reimbursement
 class PartiesBO(partiesDAO: PartiesDAO) {
     private var mPartiesDAO: PartiesDAO = partiesDAO
 
-    fun fetchReimbursements(monthNumber: Int, quotaCode: Int): Array<Reimbursement> {
-        return mPartiesDAO.fetchReimbursements(monthNumber, quotaCode)
+    fun fetchReimbursements(monthNumber: Int, quotaCode: Int, offset : Int): Array<Reimbursement> {
+        return mPartiesDAO.fetchReimbursements(monthNumber, quotaCode, offset)
     }
 
 }
