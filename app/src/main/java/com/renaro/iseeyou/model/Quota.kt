@@ -6,27 +6,27 @@ package com.renaro.iseeyou.model
 
 enum class Quota(val title: String, val code: Int) {
 
-    AIRCRAFT("Aircraft renting or charter of aircraft", 119),
-    AUTOMOTIVE("Automotive vehicle renting or charter", 120),
-    AUTOMOTIVE2("Automotive vehicle renting or watercraft charter", 15),
-    MEAL("Congressperson meal", 13),
-    CONSULTANCY("Consultancy, research and technical work", 4),
-    FLIGHT("Flight tickets", 9),
-    FUELS("Fuels and lubricants", 3),
-    LOCOMOTION("Locomotion, meal and lodging", 2),
-    LODGING("Lodging, except for congressperson from Distrito Federal", 14),
-    MAINTENANCE("Maintenance of office supporting parliamentary activity", 1),
-    PARTICIPATION("Participation in course, talk or similar event", 137),
-    POST("Postal services", 11),
-    PUBLICATION("Publication subscriptions", 12),
-    PUBLICITY("Publicity of parliamentary activity", 5),
-    SUPPLY("Purchase of office supplies", 6),
-    SECURITY("Security service provided by specialized company", 8),
-    SOFTWARE("Software purchase or renting; Postal services; Subscriptions", 7),
-    TAXI("Taxi, toll and parking", 122),
-    TELECOMMUNICATION("Telecommunication", 10),
-    TERRESTIAL("Terrestrial, maritime and fluvial tickets", 123),
-    WATERCRAFT("Watercraft renting or charter", 121)
+    AIRCRAFT("Aluguel ou fretamento de Aeronaves", 119),
+    AUTOMOTIVE("Aluguel ou fretamento de veículos ", 120),
+    AUTOMOTIVE2("Aluguel de veículos automotivos ou embarcações", 15),
+    MEAL("Refeição do congressista", 13),
+    CONSULTANCY("Consultoria, pesquisa e trabalho técnico.", 4),
+    FLIGHT("Passagens aéreas", 9),
+    FUELS("Combustível e Lubrificantes", 3),
+    LOCOMOTION("Locomoção, alimentação e alojamento.", 2),
+    LODGING("Alojamento, exceto para congressista do Distrito Federal.", 14),
+    MAINTENANCE("Manutenção do gabinete e suporte de atividades parlamentares.", 1),
+    PARTICIPATION("Participação em curso, palestras ou eventos similares.", 137),
+    POST("Serviços Postais", 11),
+    PUBLICATION("Assinaturas de Publicação", 12),
+    PUBLICITY("Publicidade de atividades parlamentares.", 5),
+    SUPPLY("Compra de suprimentos para o gabinete.", 6),
+    SECURITY("Serviço de segurança provido por empresas especializadas.", 8),
+    SOFTWARE("Aluguel ou compra de Softwares. Serviços Postais e Assinaturas.", 7),
+    TAXI("Taxi, pedágio e estacionamento.", 122),
+    TELECOMMUNICATION("Telecomunicação", 10),
+    TERRESTIAL("Bilhetes terrestres, marítmos e fluviais.", 123),
+    WATERCRAFT("Aluguel de embarcações", 121)
 
 
 }
